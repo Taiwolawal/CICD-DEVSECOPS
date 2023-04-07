@@ -39,4 +39,8 @@ When our Jenkins server is up, we need ensure we have some plugins that will be 
 Secuity group settings to allow ssh into the server, connect to jenkins server which opens on port 8080
 <img width="1336" alt="image" src="https://user-images.githubusercontent.com/50557587/230622290-5bb9bae6-2515-4f48-aafa-566fc782073c.png">
 
+Our Jenkins-server is up on running
+<img width="1096" alt="image" src="https://user-images.githubusercontent.com/50557587/230623006-39727072-e58e-432b-86c5-9d45027eb364.png">
+
+
 
