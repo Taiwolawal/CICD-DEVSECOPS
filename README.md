@@ -32,7 +32,7 @@ We will be creating a jenkins server and a kubernetes cluster
 
 <img width="1012" alt="image" src="https://user-images.githubusercontent.com/50557587/230592922-f42e1c99-b8c7-4c12-8644-e55f7ec8d14a.png">
 
-When our Jenkins server is up, we need ensure we have some plugins that will be needed for our CICD pipeline to function properly. They are Git, Kubernetes CLI, Maven and Docker.
+When our Jenkins server is up, we need ensure we have some installations done on the server that will be needed for our CICD pipeline to function properly. They are Git, Kubernetes CLI, kubectl,  Maven and Docker.
 
 <img width="1361" alt="image" src="https://user-images.githubusercontent.com/50557587/230621941-05aa0d27-1ea2-4f6b-ae5e-f40683d49a9b.png">
 
@@ -43,7 +43,7 @@ Our Jenkins-server is up on running
 
 <img width="1110" alt="image" src="https://user-images.githubusercontent.com/50557587/230624361-ff7d73a3-51ba-459e-b3f1-280a7fed09b7.png">
 
-## Install Jenkins
+# Install Jenkins
 Pre-requisites:
 - Java (JDK)
 ````
@@ -59,5 +59,28 @@ Verify Java is installed
 
 Jenkins is up and running
 <img width="1409" alt="image" src="https://user-images.githubusercontent.com/50557587/230627570-b00d52f1-9eba-49d0-a04a-88e465896f2e.png">
+
+# Install Maven for java application
+
+```
+sudo apt install -y maven
+mvn -v
+```
+
+# Install kubectl to run command when working with kubernetes
+
+````
+curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.25.7/2023-03-17/bin/linux/amd64/kubectl
+sha256sum -c kubectl.sha256
+chmod +x ./kubectl
+mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$PATH:$HOME/bin
+echo 'export PATH=$PATH:$HOME/bin' >> ~/.bashrc
+kubectl version --short --client
+````
+# install Docker
+
+
+
+
 
 
