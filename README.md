@@ -18,4 +18,4 @@ This project aims to fully integrate security in our DevOps pipeline and focus o
 
 ![image](https://user-images.githubusercontent.com/50557587/230586192-cfd0fd65-57fd-4d25-a94a-b87826123533.png)
 
-
+![image](https://user-images.githubusercontent.com/50557587/230586453-65b1c833-d058-4f82-a725-b255b2fd7244.png)
