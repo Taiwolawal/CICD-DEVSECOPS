@@ -34,3 +34,9 @@ We will be creating a jenkins server and a kubernetes cluster
 
 When our Jenkins server is up, we need ensure we have some plugins that will be needed for our CICD pipeline to function properly. They are Git, Kubernetes CLI, Maven and Docker.
 
+<img width="1361" alt="image" src="https://user-images.githubusercontent.com/50557587/230621941-05aa0d27-1ea2-4f6b-ae5e-f40683d49a9b.png">
+
+Secuity group settings to allow ssh into the server, connect to jenkins server which opens on port 8080
+<img width="1336" alt="image" src="https://user-images.githubusercontent.com/50557587/230622290-5bb9bae6-2515-4f48-aafa-566fc782073c.png">
+
+
