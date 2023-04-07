@@ -47,9 +47,8 @@ Our Jenkins-server is up on running
 Pre-requisites:
 - Java (JDK)
 ````
- sudo apt update
+sudo apt update
 sudo apt install openjdk-11-jre
-
 ````
 
 Verify Java is installed
