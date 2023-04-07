@@ -18,14 +18,14 @@ This project aims to fully integrate security in our DevOps pipeline and focus o
 
 ![image](https://user-images.githubusercontent.com/50557587/230586192-cfd0fd65-57fd-4d25-a94a-b87826123533.png)
 
-This is a typical workfflow a pipeline and security checks embedded in each stage.
+This is a typical workflow a pipeline and security checks embedded in each stage.
 ![image](https://user-images.githubusercontent.com/50557587/230586453-65b1c833-d058-4f82-a725-b255b2fd7244.png)
 
 In this project we will be deploying a Java based applcation into a kubernetes cluster making use of Jenkins for our continous integration and Argocd for continous deployment respectively.
 
 ## Requirements
 - ec2 instance for our jenkins server with appropriate security settings
-- Install jenkins, git, maven (to build java application), Kubernetes CLI (kubectl), and docker
+- Install jenkins, git, maven (to build java application), Kubernetes CLI (kubectl), and docker onto our jenkins server.
 
 <img width="1361" alt="image" src="https://user-images.githubusercontent.com/50557587/230621941-05aa0d27-1ea2-4f6b-ae5e-f40683d49a9b.png">
 
