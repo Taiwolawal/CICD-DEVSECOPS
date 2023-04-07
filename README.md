@@ -52,5 +52,12 @@ sudo apt install openjdk-11-jre
 ````
 
 Verify Java is installed
+
 ``java -version ``
+
+<img width="1091" alt="image" src="https://user-images.githubusercontent.com/50557587/230627131-aaafa007-69b6-47ac-b656-abd3f507233a.png">
+
+Jenkins is up and running
+<img width="1409" alt="image" src="https://user-images.githubusercontent.com/50557587/230627570-b00d52f1-9eba-49d0-a04a-88e465896f2e.png">
+
 
