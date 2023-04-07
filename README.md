@@ -23,16 +23,9 @@ This is a typical workfflow a pipeline and security checks embedded in each stag
 
 In this project we will be deploying a Java based applcation into a kubernetes cluster making use of Jenkins for our continous integration and Argocd for continous deployment respectively.
 
-## Setting up our DevOps Pipeline
-We will be creating a jenkins server and a kubernetes cluster
-
-# Jenkins Setup
-
-<img width="1410" alt="image" src="https://user-images.githubusercontent.com/50557587/230592827-2e11fc69-85db-486f-aef9-b1eeebff0e09.png">
-
-<img width="1012" alt="image" src="https://user-images.githubusercontent.com/50557587/230592922-f42e1c99-b8c7-4c12-8644-e55f7ec8d14a.png">
-
-When our Jenkins server is up, we need ensure we have some installations done on the server that will be needed for our CICD pipeline to function properly. They are Git, Kubernetes CLI, kubectl,  Maven and Docker.
+## Requirements
+- ec2 instance for our jenkins server with appropriate security settings
+- Install jenkins, git, maven (to build java application), Kubernetes CLI (kubectl), and docker
 
 <img width="1361" alt="image" src="https://user-images.githubusercontent.com/50557587/230621941-05aa0d27-1ea2-4f6b-ae5e-f40683d49a9b.png">
 
