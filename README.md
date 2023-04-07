@@ -16,4 +16,6 @@ This project aims to fully integrate security in our DevOps pipeline and focus o
 - Fix/Patch Vulnerabilities in Dependencies, Dockerfile, Images, K8s Resources
 - Monitoring Vulnerabilities and Kubernetes Cluster
 
-https://www.notion.so/DevSecOps-2f5157de2a55482fb8c338a01b9ab08c?pvs=4#52380a39f5c34d31a1b77a3fd8a5ecb1
+![image](https://user-images.githubusercontent.com/50557587/230586192-cfd0fd65-57fd-4d25-a94a-b87826123533.png)
+
+
