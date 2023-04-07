@@ -3,7 +3,6 @@
 echo ".........----------------#################._.-.-INSTALL-.-._.#################----------------........."
 
 
-
 echo ".........----------------#################._.-.-Jenkins-.-._.#################----------------........."
 sudo apt update
 sudo apt install -y openjdk-11-jdk
@@ -22,6 +21,7 @@ java -version
 sudo apt install -y maven
 mvn -v
 
+
 echo ".........----------------#################._.-.-Kubectl-.-._.#################----------------........."
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
 chmod +x kubectl
@@ -39,7 +39,6 @@ sudo apt-get update
 sudo apt-get install docker-ce docker-ce-cli containerd.io -y
 sudo systemctl enable docker
 sudo systemctl start docker
-
 
 
 echo ".........----------------#################._.-.-Git-.-._.#################----------------........."
