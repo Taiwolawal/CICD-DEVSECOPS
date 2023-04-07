@@ -43,17 +43,7 @@ Our Jenkins-server is up on running
 
 <img width="1110" alt="image" src="https://user-images.githubusercontent.com/50557587/230624361-ff7d73a3-51ba-459e-b3f1-280a7fed09b7.png">
 
-# Install Jenkins
-Pre-requisites:
-- Java (JDK)
-````
-sudo apt update
-sudo apt install openjdk-11-jre
-````
-
-Verify Java is installed
-
-``java -version ``
+Run the installation.sh file, to install necessary setup required for the project such as jenkins, maven, kubectl, java and docker
 
 <img width="1091" alt="image" src="https://user-images.githubusercontent.com/50557587/230627131-aaafa007-69b6-47ac-b656-abd3f507233a.png">
 
