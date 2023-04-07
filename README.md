@@ -46,6 +46,21 @@ Jenkins is up and running
 Installation complete
 <img width="1019" alt="image" src="https://user-images.githubusercontent.com/50557587/230652685-e0358e35-03f4-4578-b9e3-38c511407671.png">
 
+We need to install some plugin needed by jenkins
+- Jacoco
+- Sonar
+- Pit mutation
+- kubernetes-cli
+- Performance
+- Blue-ocean
+
+We can test our pipeline running a small test
+
+<img width="1373" alt="image" src="https://user-images.githubusercontent.com/50557587/230690006-a814a559-354d-4188-8be3-631982a78c29.png">
+
+<img width="1392" alt="image" src="https://user-images.githubusercontent.com/50557587/230689824-23416b63-d532-4dce-b874-5341ee9e1941.png">
+
+
 
 
 
