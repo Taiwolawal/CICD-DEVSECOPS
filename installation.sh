@@ -26,6 +26,7 @@ apt-cache policy docker-ce
 sudo apt install docker-ce -y
 sudo systemctl status docker
 
+
 echo ".........----------------#################._.-.-Git-.-._.#################----------------........."
 sudo apt update
 sudo apt install git
