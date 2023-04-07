@@ -43,6 +43,10 @@ Run the installation.sh file, to install necessary setup required for the projec
 Jenkins is up and running
 <img width="1409" alt="image" src="https://user-images.githubusercontent.com/50557587/230627570-b00d52f1-9eba-49d0-a04a-88e465896f2e.png">
 
+Installation complete
+<img width="1019" alt="image" src="https://user-images.githubusercontent.com/50557587/230652685-e0358e35-03f4-4578-b9e3-38c511407671.png">
+
+
 
 
 
