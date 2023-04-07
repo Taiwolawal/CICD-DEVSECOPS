@@ -1,6 +1,6 @@
 # CICD-DEVSECOPS
 
-CI/CD (Continuous Integration/Continuous Deployment) DevSecOps is a software development methodology that integrates the principles of security into the DevOps model. The DevOps methodology involves the collaboration between development and operations teams to automate the software delivery process, which includes building, testing, and deploying software quickly and efficiently.
+What is DevSecOps? DevSecOps is a software development methodology that integrates the principles of security into the DevOps model. The DevOps methodology involves the collaboration between development and operations teams to automate the software delivery process, which includes building, testing, and deploying software quickly and efficiently.
 
 In the context of DevSecOps, security practices are integrated into the entire software delivery lifecycle, from the early stages of development through to production deployment. This means that security is not an afterthought, but rather a fundamental part of the software development process.
 
@@ -18,7 +18,7 @@ This project aims to fully integrate security in our DevOps pipeline and focus o
 
 ![image](https://user-images.githubusercontent.com/50557587/230586192-cfd0fd65-57fd-4d25-a94a-b87826123533.png)
 
-This is a typical workflow a pipeline and security checks embedded in each stage.
+This is a typical workflow pipeline and security checks embedded in each stage.
 ![image](https://user-images.githubusercontent.com/50557587/230586453-65b1c833-d058-4f82-a725-b255b2fd7244.png)
 
 In this project we will be deploying a Java based applcation into a kubernetes cluster making use of Jenkins for our continous integration and Argocd for continous deployment respectively.
