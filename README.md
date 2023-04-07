@@ -60,6 +60,13 @@ We can test our pipeline running a small test
 
 <img width="1392" alt="image" src="https://user-images.githubusercontent.com/50557587/230689824-23416b63-d532-4dce-b874-5341ee9e1941.png">
 
+The error we got in the screenshot was mainly because we do not have a kubernetes cluster set up yet and we need to run it in the format below
+
+<img width="760" alt="image" src="https://user-images.githubusercontent.com/50557587/230690480-4ed5f587-c392-4398-9b72-374404e36d0c.png">
+
+## Use case
+![image](https://user-images.githubusercontent.com/50557587/230690630-cdb9d6bc-d2d2-4fbe-81cb-08d1c31db32b.png)
+
 
 
 
