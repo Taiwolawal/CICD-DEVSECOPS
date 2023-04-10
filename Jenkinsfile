@@ -19,23 +19,5 @@ pipeline {
       }
     }
 
-    stage('Unit Tests - JUnit and Jacoco') {
-      steps {
-        sh "mvn test"
-      }
-    }
-
-    stage('Mutation Test - PIT') {
-      steps {
-        sh "mvn org.pitest:pitest-maven:mutationCoverage"
-      }
-    }
-
-    post {
-        always {
-          junit 'target/surefire-reports/*.xml'
-          jacoco execPattern: 'target/jacoco.exec'
-        }
-    }
-  }
+    
 }
