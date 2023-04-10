@@ -18,7 +18,7 @@ kubectl version --client
 
 
 echo ".........----------------#################._.-.-Docker-.-._.#################----------------........."
-sudo apt-get update
+sudo apt-get update -y
 sudo apt-get install apt-transport-https ca-certificates curl gnupg lsb-release -y
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
 echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
@@ -27,6 +27,7 @@ sudo apt-get update
 sudo apt-get install docker-ce docker-ce-cli containerd.io -y
 sudo systemctl enable docker
 sudo systemctl start docker
+sudo chmod 777 /var/run/docker.sock  
 sudo usermod -a -G docker jenkins
 
 
@@ -46,3 +47,6 @@ sudo apt install -y jenkins
 sudo systemctl start jenkins
 sudo systemctl enable jenkins
 sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+
+echo ".........----------------#################._.-.-Sonarqube-.-._.#################----------------........."
+sudo docker run -d --name sonarqube -p 9000:9000 sonarqube
