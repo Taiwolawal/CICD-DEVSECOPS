@@ -24,9 +24,15 @@ pipeline {
       }
     }
 
-    stage('Mutation Tests - PIT') {
+    stage('SonarQube - SAST') {
       steps {
-        sh "mvn org.pitest:pitest-maven:mutationCoverage"
+        withSonarQubeEnv('SonarQube') {
+            sh "mvn clean verify sonar:sonar \
+                -Dsonar.projectKey=DevSecOps \
+                -Dsonar.projectName='DevSecOps' \
+                -Dsonar.host.url=http://13.41.145.102:9000 \
+                -Dsonar.token=sqp_35af92fa9aa7b2b7afbd04f97d0f0dcf45cf80d2"
+        }
       }
     }
     
@@ -36,8 +42,6 @@ pipeline {
         always {
           junit 'target/surefire-reports/*.xml'
           jacoco execPattern: 'target/jacoco.exec'
-          pitmutation mutationStatsFile: '**/target/pit-reports/**/mutations.xml'
-          
         }
     }
  }   
