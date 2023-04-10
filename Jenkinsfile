@@ -4,7 +4,7 @@ pipeline {
   stages {
 
     stage('Git Checkout'){
-            steps{
+        steps{
             gitCheckout(
                 branch: "main",
                 url: "https://github.com/Taiwolawal/CICD-DEVSECOPS.git"
@@ -19,6 +19,12 @@ pipeline {
       }
     }
 
-    
+    stage('Unit Tests - JUnit and Jacoco') {
+      steps {
+        sh "mvn test"
+      }
     }
+
+    
+  }
  }   
