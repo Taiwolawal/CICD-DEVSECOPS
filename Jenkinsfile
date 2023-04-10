@@ -25,6 +25,12 @@ pipeline {
       }
     }
 
+    stage('Mutation Test - PIT') {
+      steps {
+        sh "mvn org.pitest:pitest-maven:mutationCoverage"
+      }
+    }
+
     stage('SonarQube - SAST') {
       steps {
         withSonarQubeEnv(credentialsId: 'sonar-token') {
