@@ -33,6 +33,10 @@ pipeline {
                 -Dsonar.host.url=http://13.41.145.102:9000 \
                 -Dsonar.token=sqp_35af92fa9aa7b2b7afbd04f97d0f0dcf45cf80d2"
         }
+        timeout(time: 2, unit: 'MINUTES') {
+          script {
+          waitForQualityGate abortPipeline: true
+           }
       }
     }
     
@@ -43,6 +47,6 @@ pipeline {
           junit 'target/surefire-reports/*.xml'
           jacoco execPattern: 'target/jacoco.exec'
         }
-        
+
     }
  }   
