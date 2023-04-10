@@ -5,10 +5,8 @@ pipeline {
 
     stage('Git Checkout'){
         steps{
-            gitCheckout(
-                branch: "main",
-                url: "https://github.com/Taiwolawal/CICD-DEVSECOPS.git"
-               )
+            script {
+                git branch: 'main', url: 'https://github.com/Taiwolawal/CICD-DEVSECOPS.git'
             }
         }
 
