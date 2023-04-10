@@ -24,9 +24,11 @@ pipeline {
       }
     }
 
+
+
     stage('SonarQube - SAST') {
       steps {
-        withSonarQubeEnv('SonarQube') {
+        withSonarQubeEnv(credentialsId: 'sonar-token') {
             sh "mvn clean verify sonar:sonar \
                 -Dsonar.projectKey=DevSecOps \
                 -Dsonar.projectName='DevSecOps' \
