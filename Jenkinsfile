@@ -9,6 +9,8 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/Taiwolawal/CICD-DEVSECOPS.git'
             }
         }
+    }
+    
 
     stage('Build Artifact - Maven') {
       steps {
