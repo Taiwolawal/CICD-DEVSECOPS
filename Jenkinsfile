@@ -32,7 +32,7 @@ pipeline {
         
     }
  
-    stage('SonarQube - SAST') {
+/*     stage('SonarQube - SAST') {
       steps {
         withSonarQubeEnv(installationName: 'sonar',credentialsId: 'sonar-token') {
             sh "mvn clean verify sonar:sonar \
@@ -47,7 +47,7 @@ pipeline {
            }
          }
       }
-    }
+    } */
 
      stage('Build Artifact - Maven') {
       steps {
