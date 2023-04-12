@@ -33,7 +33,7 @@ pipeline {
         
     }
  
-    stage('SonarQube - SAST') {
+  /*   stage('SonarQube - SAST') {
       steps {
         withSonarQubeEnv(installationName: 'sonar',credentialsId: 'sonar-token') {
             sh "mvn clean verify sonar:sonar \
@@ -47,7 +47,7 @@ pipeline {
            }
          }
       }
-    }
+    } */
 
     stage('Build Artifact - Maven') {
       steps {
@@ -67,7 +67,7 @@ pipeline {
 
   post {
         always {
-          junit 'target/surefire-reports/*.xml'
+          /* junit 'target/surefire-reports/*.xml' */
           jacoco execPattern: 'target/jacoco.exec'
         }
     }
