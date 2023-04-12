@@ -7,6 +7,7 @@ pipeline {
     IMAGE_TAG = "${BUILD_NUMBER}"
     IMAGE_NAME = "${DOCKERHUB_USERNAME}" + "/" + "${APP_NAME}"
     DOCKER_CREDS = "dockerhub"
+
   }
 
   stages {
@@ -32,14 +33,13 @@ pipeline {
         
     }
  
-/*     stage('SonarQube - SAST') {
+    stage('SonarQube - SAST') {
       steps {
         withSonarQubeEnv(installationName: 'sonar',credentialsId: 'sonar-token') {
             sh "mvn clean verify sonar:sonar \
                 -Dsonar.projectKey=devsecops-numeric-application \
                 -Dsonar.projectName='devsecops-numeric-application' \
-                -Dsonar.host.url=http://13.41.145.102:9000 \
-                -Dsonar.token=sqp_04ba54bdf7da4ca8b748905ddcfc271dcae5d3c8"
+                -Dsonar.host.url=http://13.41.145.102:9000"
         }
         timeout(time: 2, unit: 'MINUTES') {
           script {
@@ -47,7 +47,7 @@ pipeline {
            }
          }
       }
-    } */
+    }
 
     stage('Build Artifact - Maven') {
       steps {
