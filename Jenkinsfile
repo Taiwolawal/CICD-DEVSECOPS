@@ -26,7 +26,10 @@ pipeline {
     }
 
     stage('Integration Test Maven'){
-        sh 'mvn verify -DskipUnitTests'
+        steps{
+         sh 'mvn verify -DskipUnitTests'
+        }
+        
     }
  
     stage('SonarQube - SAST') {
