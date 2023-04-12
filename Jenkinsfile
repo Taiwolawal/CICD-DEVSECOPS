@@ -32,14 +32,14 @@ pipeline {
         
     }
  
-/*     stage('SonarQube - SAST') {
+    stage('SonarQube - SAST') {
       steps {
         withSonarQubeEnv(installationName: 'sonar',credentialsId: 'sonar-token') {
             sh "mvn clean verify sonar:sonar \
-                -Dsonar.projectKey=DevSecOps \
-                -Dsonar.projectName='DevSecOps' \
+                -Dsonar.projectKey=devsecops-numeric-application \
+                -Dsonar.projectName='devsecops-numeric-application' \
                 -Dsonar.host.url=http://13.41.145.102:9000 \
-                -Dsonar.token=sqp_35af92fa9aa7b2b7afbd04f97d0f0dcf45cf80d2"
+                -Dsonar.token=sqp_04ba54bdf7da4ca8b748905ddcfc271dcae5d3c8"
         }
         timeout(time: 2, unit: 'MINUTES') {
           script {
@@ -47,7 +47,7 @@ pipeline {
            }
          }
       }
-    } */
+    }
 
      stage('Build Artifact - Maven') {
       steps {
@@ -67,7 +67,7 @@ pipeline {
 
   post {
         always {
-          /* junit 'target/surefire-reports/*.xml' */
+          junit 'target/surefire-reports/*.xml'
           jacoco execPattern: 'target/jacoco.exec'
         }
     }
