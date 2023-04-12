@@ -1,6 +1,14 @@
 pipeline {
   agent any
 
+  environment{
+    DOCKERHUB_USERNAME = "wizhubdocker8s"
+    APP_NAME = "java-app-argo"
+    IMAGE_TAG = "${BUILD_NUMBER}"
+    IMAGE_NAME = "${DOCKERHUB_USERNAME}" + "/" + "${APP_NAME}"
+    DOCKER_CREDS = "dockerhub"
+  }
+
   stages {
 
     stage('Git Checkout'){
@@ -10,13 +18,6 @@ pipeline {
             }
         }
     }
-    
-    stage('Build Artifact - Maven') {
-      steps {
-        sh "mvn clean package -DskipTests=true"
-        archiveArtifacts 'target/*.jar'
-      }
-    }
 
     stage('Unit Tests - JUnit and Jacoco') {
       steps {
@@ -24,6 +25,10 @@ pipeline {
       }
     }
 
+    stage('Integration Test Maven'){
+        sh 'mvn verify -DskipUnitTests'
+    }
+ 
     stage('SonarQube - SAST') {
       steps {
         withSonarQubeEnv(installationName: 'sonar',credentialsId: 'sonar-token') {
@@ -40,6 +45,22 @@ pipeline {
          }
       }
     }
+
+     stage('Build Artifact - Maven') {
+      steps {
+        sh "mvn clean package -DskipTests=true"
+        archiveArtifacts 'target/*.jar'
+      }
+    }
+
+    stage('Docker Image Build'){
+       steps{
+        script{
+            docker_image = docker.build "${IMAGE_NAME}"
+        }
+       } 
+    }
+
   }
 
   post {
@@ -48,4 +69,6 @@ pipeline {
           jacoco execPattern: 'target/jacoco.exec'
         }
     }
- }   
+ } 
+
+
