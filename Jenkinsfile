@@ -39,8 +39,7 @@ pipeline {
             sh "mvn clean verify sonar:sonar \
                 -Dsonar.projectKey=devsecops-numeric-application \
                 -Dsonar.projectName='devsecops-numeric-application' \
-                -Dsonar.host.url=http://13.41.145.102:9000 \
-                -Dsonar.token=${SONAR_CREDS}"
+                -Dsonar.host.url=http://13.41.145.102:9000"
         }
         timeout(time: 2, unit: 'MINUTES') {
           script {
