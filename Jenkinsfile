@@ -7,7 +7,7 @@ pipeline {
     IMAGE_TAG = "${BUILD_NUMBER}"
     IMAGE_NAME = "${DOCKERHUB_USERNAME}" + "/" + "${APP_NAME}"
     DOCKER_CREDS = "dockerhub"
-
+    SONAR_CREDS = "jenkins-sonar"
   }
 
   stages {
@@ -39,7 +39,8 @@ pipeline {
             sh "mvn clean verify sonar:sonar \
                 -Dsonar.projectKey=devsecops-numeric-application \
                 -Dsonar.projectName='devsecops-numeric-application' \
-                -Dsonar.host.url=http://13.41.145.102:9000"
+                -Dsonar.host.url=http://13.41.145.102:9000 \
+                -Dsonar.token=${SONAR_CREDS}"
         }
         timeout(time: 2, unit: 'MINUTES') {
           script {
