@@ -67,8 +67,8 @@ pipeline {
    stage('Docker Image Scan: trivy'){
       steps{
         script{
-          trivy image "${DOCKERHUB_USERNAME}"/"${APP_NAME}":latest> scan.txt
-          cat scan.txt    
+          sh "trivy image ${DOCKERHUB_USERNAME}/${APP_NAME}:latest > scan.txt"
+          sh "cat scan.txt"  
         }
       }
     }
