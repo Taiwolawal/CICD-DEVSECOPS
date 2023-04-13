@@ -60,7 +60,7 @@ pipeline {
       steps{
           sh "docker build -t ${DOCKERHUB_USERNAME}/${APP_NAME} ."  
           sh "docker image tag ${DOCKERHUB_USERNAME}/${APP_NAME} ${DOCKERHUB_USERNAME}/${APP_NAME}:${IMAGE_TAG}"
-          sh "docker image tag ${DOCKERHUB_USERNAME}/${APP_NAME}:latest"
+          sh "docker image tag ${DOCKERHUB_USERNAME}/${APP_NAME} ${DOCKERHUB_USERNAME}/${APP_NAME}:latest"
       } 
     }
 
