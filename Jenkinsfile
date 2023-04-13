@@ -67,21 +67,21 @@ pipeline {
    stage('Docker Image Scan: trivy'){
       steps{
         script{
-          trivy image ${DOCKERHUB_USERNAME}/${APP_NAME}:latest > scan.txt
+          trivy image "${DOCKERHUB_USERNAME}/${APP_NAME}":latest > scan.txt
           cat scan.txt    
         }
       }
     }
 
-   stage('Docker Image Push : DockerHub '){
+   stage('Docker Image Push : DockerHub'){
       steps{
         script{
           withCredentials([usernamePassword(credentialsId: 'dockerhub', 
           passwordVariable: 'PASSWORD', 
           usernameVariable: 'USER')]) {
           docker login -u '$USER' -p '$PASSWORD'
-          docker image push ${DOCKERHUB_USERNAME}/${APP_NAME}:${IMAGE_TAG}
-          docker image push ${DOCKERHUB_USERNAME}/${APP_NAME}:latest
+          docker image push "${DOCKERHUB_USERNAME}/${APP_NAME}:${IMAGE_TAG}"
+          docker image push "${DOCKERHUB_USERNAME}/${APP_NAME}":latest
           }           
         }
       }      
@@ -90,8 +90,8 @@ pipeline {
     stage('Docker Image Cleanup'){
       steps{
         script{
-          docker rmi ${DOCKERHUB_USERNAME}/${APP_NAME}:${IMAGE_TAG}
-          docker rmi ${DOCKERHUB_USERNAME}/${APP_NAME}:latest
+          docker rmi "${DOCKERHUB_USERNAME}/${APP_NAME}:${IMAGE_TAG}"
+          docker rmi "${DOCKERHUB_USERNAME}/${APP_NAME}":latest
         }
       }
     }
