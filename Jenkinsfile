@@ -64,7 +64,7 @@ pipeline {
           }, 
           "Dockerfile Scan: Trivy":{
             script {
-            sh "trivy file --format json Dockerfile > scan.json"
+            sh "trivy fs Dockerfile > scan.json"
             sh "echo scan.json"
             }
           }
