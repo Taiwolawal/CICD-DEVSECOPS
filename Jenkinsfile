@@ -58,30 +58,22 @@ pipeline {
 
     stage('Docker Image Build'){
       steps{
-        script{
-          docker_image = docker.build "${IMAGE_NAME}"
-        }
+          sh "docker build -t ${DOCKERHUB_USERNAME}/${APP_NAME}:latest"
       } 
     }
 
    stage('Docker Image Scan: trivy'){
       steps{
-        script{
           sh "trivy image ${DOCKERHUB_USERNAME}/${APP_NAME}:latest > scan.txt"
           sh "cat scan.txt"  
-        }
       }
     }
 
    stage('Docker Image Push : DockerHub'){
       steps{
-          withCredentials([usernamePassword(credentialsId: 'dockerhub', 
-          passwordVariable: 'PASS', 
-          usernameVariable: 'USER')]) {
           sh 'docker login -u $DOCKER_CREDS_USR -p $DOCKER_CREDS_PSW'
           sh "docker image push ${DOCKERHUB_USERNAME}/${APP_NAME}:${IMAGE_TAG}"
-          sh "docker image push ${DOCKERHUB_USERNAME}/${APP_NAME}:latest"
-          }           
+          sh "docker image push ${DOCKERHUB_USERNAME}/${APP_NAME}:latest"               
       }      
     } 
 
