@@ -63,9 +63,9 @@ pipeline {
             sh "mvn dependency-check:check"
           }, 
           "Dockerfile Scan: Trivy":{
+            sh 'trivy -f json -o scan.json Dockerfile'
             script {
-            trivy file:"Dockerfile",format:"json",output:"scan.json"
-            def scanResults = readJSON file: "scan.json"
+            def scanResults = readJSON file: 'scan.json'
             echo "${scanResults.Vulnerabilities.length()} vulnerabilities found"
             }
           }
