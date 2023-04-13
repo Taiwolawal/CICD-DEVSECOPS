@@ -84,8 +84,7 @@ pipeline {
           sh "docker rmi ${DOCKERHUB_USERNAME}/${APP_NAME}:${IMAGE_TAG}"
           sh "docker rmi ${DOCKERHUB_USERNAME}/${APP_NAME}:latest"
       }
-    }
-        
+    }    
   }
 
   post {
