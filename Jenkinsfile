@@ -58,7 +58,7 @@ pipeline {
 
     stage('Docker Image Build'){
       steps{
-          sh "docker build -t ${DOCKERHUB_USERNAME}/${APP_NAME}:latest"
+          sh "docker build -t ${DOCKERHUB_USERNAME}/${APP_NAME}:latest ."  
       } 
     }
 
