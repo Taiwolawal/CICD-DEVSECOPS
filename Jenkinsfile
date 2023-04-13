@@ -80,14 +80,14 @@ pipeline {
       } 
     }
 
-   stage('Docker Image Scan: trivy'){
+   stage('Docker Image Scan: Trivy'){
       steps{
           sh "trivy image ${DOCKERHUB_USERNAME}/${APP_NAME}:latest > scan.txt"
           sh "cat scan.txt"  
       }
     }
 
-   stage('Docker Image Push : DockerHub'){
+   stage('Docker Image Push: DockerHub'){
       steps{
           sh 'docker login -u $DOCKER_CREDS_USR -p $DOCKER_CREDS_PSW'
           sh "docker image push ${DOCKERHUB_USERNAME}/${APP_NAME}:${IMAGE_TAG}"
