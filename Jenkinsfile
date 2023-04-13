@@ -57,31 +57,45 @@ pipeline {
     }
 
     stage('Docker Image Build'){
-       steps{
+      steps{
         script{
-            docker_image = docker.build "${IMAGE_NAME}"
+          docker_image = docker.build "${IMAGE_NAME}"
         }
-       } 
+      } 
     }
 
-    stage('Docker Image Scan: trivy '){
-            steps{
-               script{
-                   
-                trivy image ${DOCKERHUB_USERNAME}/${APP_NAME}:latest > scan.txt
-                cat scan.txt
-               }
-            }
+   stage('Docker Image Scan: trivy '){
+      steps{
+        script{
+          trivy image ${DOCKERHUB_USERNAME}/${APP_NAME}:latest > scan.txt
+          cat scan.txt    
         }
-        stage('Docker Image Push : DockerHub '){
-         when { expression {  params.action == 'create' } }
-            steps{
-               script{
-                   
-                   dockerImagePush("${params.ImageName}","${params.ImageTag}","${params.DockerHubUser}")
-               }
-            }
-        }   
+      }
+    }
+
+   stage('Docker Image Push : DockerHub '){
+      steps{
+        script{
+          withCredentials([usernamePassword(credentialsId: 'dockerhub', 
+          passwordVariable: 'PASSWORD', 
+          usernameVariable: 'USER')]) {
+          docker login -u '$USER' -p '$PASSWORD'
+          docker image push ${DOCKERHUB_USERNAME}/${APP_NAME}:${IMAGE_TAG}
+          docker image push ${DOCKERHUB_USERNAME}/${APP_NAME}:latest
+          }           
+        }
+      }      
+    } 
+
+    stage('Docker Image Cleanup'){
+      steps{
+        script{
+          docker rmi ${DOCKERHUB_USERNAME}/${APP_NAME}:${IMAGE_TAG}
+          docker rmi ${DOCKERHUB_USERNAME}/${APP_NAME}:latest
+        }
+      }
+    }
+        
   }
 
   post {
