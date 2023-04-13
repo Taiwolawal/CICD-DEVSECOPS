@@ -80,7 +80,7 @@ pipeline {
           usernameVariable: 'USER')]) {
           sh 'docker login -u $DOCKER_CREDS_USR -p $DOCKER_CREDS_PSW'
           sh "docker image push ${DOCKERHUB_USERNAME}/${APP_NAME}:${IMAGE_TAG}"
-          sh "docker image push ${DOCKERHUB_USERNAME}/${APP_NAME}:latest"
+          /* sh "docker image push ${DOCKERHUB_USERNAME}/${APP_NAME}:latest" */
           }           
       }      
     } 
