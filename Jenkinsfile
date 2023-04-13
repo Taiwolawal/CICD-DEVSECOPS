@@ -63,6 +63,25 @@ pipeline {
         }
        } 
     }
+
+    stage('Docker Image Scan: trivy '){
+            steps{
+               script{
+                   
+                trivy image ${DOCKERHUB_USERNAME}/${APP_NAME}:latest > scan.txt
+                cat scan.txt
+               }
+            }
+        }
+        stage('Docker Image Push : DockerHub '){
+         when { expression {  params.action == 'create' } }
+            steps{
+               script{
+                   
+                   dockerImagePush("${params.ImageName}","${params.ImageTag}","${params.DockerHubUser}")
+               }
+            }
+        }   
   }
 
   post {

@@ -31,6 +31,14 @@ sudo chmod 777 /var/run/docker.sock
 sudo usermod -a -G docker jenkins
 
 
+echo ".........----------------#################._.-.-Trivy-.-._.#################----------------........."
+sudo apt-get install wget apt-transport-https gnupg lsb-release
+wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | sudo apt-key add -
+echo deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main | sudo tee -a /etc/apt/sources.list.d/trivy.list
+sudo apt-get update
+sudo apt-get install trivy
+
+
 echo ".........----------------#################._.-.-Git-.-._.#################----------------........."
 sudo apt update
 sudo apt install git -y
