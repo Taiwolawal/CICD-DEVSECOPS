@@ -64,7 +64,8 @@ pipeline {
           }, 
           "Dockerfile Scan":{
             script {
-            sh "trivy fs Dockerfile"
+              sh "trivy config ."
+            /* sh "trivy fs Dockerfile" */
             }
           }
         )
