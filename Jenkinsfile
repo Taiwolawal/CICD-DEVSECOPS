@@ -67,7 +67,7 @@ pipeline {
    stage('Docker Image Scan: trivy'){
       steps{
         script{
-          trivy image "${DOCKERHUB_USERNAME}/${APP_NAME}":latest > scan.txt
+          trivy image "${DOCKERHUB_USERNAME}/${APP_NAME}:latest" > scan.txt
           cat scan.txt    
         }
       }
@@ -81,7 +81,7 @@ pipeline {
           usernameVariable: 'USER')]) {
           docker login -u '$USER' -p '$PASSWORD'
           docker image push "${DOCKERHUB_USERNAME}/${APP_NAME}:${IMAGE_TAG}"
-          docker image push "${DOCKERHUB_USERNAME}/${APP_NAME}":latest
+          docker image push "${DOCKERHUB_USERNAME}/${APP_NAME}:latest"
           }           
         }
       }      
@@ -91,7 +91,7 @@ pipeline {
       steps{
         script{
           docker rmi "${DOCKERHUB_USERNAME}/${APP_NAME}:${IMAGE_TAG}"
-          docker rmi "${DOCKERHUB_USERNAME}/${APP_NAME}":latest
+          docker rmi "${DOCKERHUB_USERNAME}/${APP_NAME}:latest"
         }
       }
     }
