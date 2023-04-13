@@ -56,13 +56,13 @@ pipeline {
       }
     }
 
-    stage('Vulnerability Scan - Dockerfile and Maven'){
+    stage('Vulnerability Scan'){
       steps{
         parallel(
           "Dependency Scan":{
             sh "mvn dependency-check:check"
           }, 
-          "Dockerfile Scan: Trivy":{
+          "Dockerfile Scan":{
             script {
             sh "trivy fs Dockerfile"
             }
