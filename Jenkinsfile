@@ -75,24 +75,20 @@ pipeline {
 
    stage('Docker Image Push : DockerHub'){
       steps{
-        script{
           withCredentials([usernamePassword(credentialsId: 'dockerhub', 
           passwordVariable: 'PASSWORD', 
           usernameVariable: 'USER')]) {
-          docker login -u '$USER' -p '$PASSWORD'
-          docker image push "${DOCKERHUB_USERNAME}/${APP_NAME}:${IMAGE_TAG}"
-          docker image push "${DOCKERHUB_USERNAME}/${APP_NAME}:latest"
+          sh "docker login -u '$USER' -p '$PASSWORD'"
+          sh "docker image push ${DOCKERHUB_USERNAME}/${APP_NAME}:${IMAGE_TAG}"
+          sh "docker image push ${DOCKERHUB_USERNAME}/${APP_NAME}:latest"
           }           
-        }
       }      
     } 
 
     stage('Docker Image Cleanup'){
       steps{
-        script{
-          docker rmi "${DOCKERHUB_USERNAME}/${APP_NAME}:${IMAGE_TAG}"
-          docker rmi "${DOCKERHUB_USERNAME}/${APP_NAME}:latest"
-        }
+          sh "docker rmi ${DOCKERHUB_USERNAME}/${APP_NAME}:${IMAGE_TAG}"
+          sh "docker rmi ${DOCKERHUB_USERNAME}/${APP_NAME}:latest"
       }
     }
         
