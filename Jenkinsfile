@@ -56,6 +56,24 @@ pipeline {
       }
     }
 
+    stage('Vulnerability Scan - Dockerfile and Maven'){
+      steps{
+        parallel(
+          "Dependency Scan":{
+            sh "mvn dependency-check:check"
+          }, 
+          "Dockerfile Scan: Trivy":{
+            script {
+            trivy file:"Dockerfile",format:"json",output:"scan.json"
+            def scanResults = readJSON file: "scan.json"
+            echo "${scanResults.Vulnerabilities.length()} vulnerabilities found"
+            }
+          }
+        )
+        
+      }
+    }
+
     stage('Docker Image Build'){
       steps{
           sh "docker build -t ${DOCKERHUB_USERNAME}/${APP_NAME} ."  
