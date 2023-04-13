@@ -6,7 +6,7 @@ pipeline {
     APP_NAME = "java-app-argo"
     IMAGE_TAG = "${BUILD_NUMBER}"
     IMAGE_NAME = "${DOCKERHUB_USERNAME}" + "/" + "${APP_NAME}"
-    DOCKER_CREDS = "dockerhub"
+    DOCKER_CREDS = credentials('dockerhub')
     SONAR_CREDS = "jenkins-sonar"
   }
 
@@ -78,7 +78,7 @@ pipeline {
           withCredentials([usernamePassword(credentialsId: 'dockerhub', 
           passwordVariable: 'PASS', 
           usernameVariable: 'USER')]) {
-          sh "docker login -u '$USER' -p '$PASS'"
+          sh 'docker login -u $DOCKER_CREDS_USR -p $DOCKER_CREDS_PSW'
           sh "docker image push ${DOCKERHUB_USERNAME}/${APP_NAME}:${IMAGE_TAG}"
           sh "docker image push ${DOCKERHUB_USERNAME}/${APP_NAME}:latest"
           }           
