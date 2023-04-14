@@ -103,9 +103,11 @@ pipeline {
       }
     } 
 
-    stage(){
+   /*  stage('Update Gitops Deploy'){
+      steps{
 
-    }
+      }
+    } */
 
   }
 
