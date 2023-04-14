@@ -75,15 +75,15 @@ pipeline {
 
     stage('Docker Image Build'){
       steps{
-          sh "docker build -t ${DOCKERHUB_USERNAME}/${APP_NAME} ."  
-          sh "docker image tag ${DOCKERHUB_USERNAME}/${APP_NAME} ${DOCKERHUB_USERNAME}/${APP_NAME}:${IMAGE_TAG}"
-          sh "docker image tag ${DOCKERHUB_USERNAME}/${APP_NAME} ${DOCKERHUB_USERNAME}/${APP_NAME}:latest"
+          sh "docker build -t ${IMAGE_NAME} ."  
+          sh "docker image tag ${IMAGE_NAME} ${IMAGE_NAME}:${IMAGE_TAG}"
+          sh "docker image tag ${IMAGE_NAME} ${IMAGE_NAME}:latest"
       } 
     }
 
    stage('Docker Image Scan: Trivy'){
       steps{
-          sh "trivy image ${DOCKERHUB_USERNAME}/${APP_NAME}:latest > scan.txt"
+          sh "trivy image ${IMAGE_NAME}:latest > scan.txt"
           sh "cat scan.txt"  
       }
     }
@@ -91,17 +91,22 @@ pipeline {
    stage('Docker Image Push: DockerHub'){
       steps{
           sh 'docker login -u $DOCKER_CREDS_USR -p $DOCKER_CREDS_PSW'
-          sh "docker image push ${DOCKERHUB_USERNAME}/${APP_NAME}:${IMAGE_TAG}"
-          sh "docker image push ${DOCKERHUB_USERNAME}/${APP_NAME}:latest"               
+          sh "docker image push ${IMAGE_NAME}:${IMAGE_TAG}"
+          sh "docker image push ${IMAGE_NAME}:latest"               
       }      
     } 
 
     stage('Docker Image Cleanup'){
       steps{
-          sh "docker rmi ${DOCKERHUB_USERNAME}/${APP_NAME}:${IMAGE_TAG}"
-          sh "docker rmi ${DOCKERHUB_USERNAME}/${APP_NAME}:latest"
+          sh "docker rmi ${IMAGE_NAME}:${IMAGE_TAG}"
+          sh "docker rmi ${IMAGE_NAME}:latest"
       }
-    }    
+    } 
+
+    stage(){
+
+    }
+
   }
 
   post {
