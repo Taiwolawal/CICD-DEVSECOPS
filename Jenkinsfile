@@ -65,11 +65,11 @@ pipeline {
           "Dockerfile Scan":{
             script {
               sh "trivy config ."
+              sh "bash trivy-dockerfile-image-scan.sh"
             /* sh "trivy fs Dockerfile" */
             }
           }
-        )
-        
+        )      
       }
     }
 
@@ -103,11 +103,51 @@ pipeline {
       }
     } 
 
-   /*  stage('Update Gitops Deploy'){
+    stage('Update CD Pipeline With Image'){
       steps{
 
       }
-    } */
+    }
+
+     stage('Update Deployment.yaml file'){
+      steps{
+        script{
+          sh """
+            cat deployment.yaml
+            sed -i '$/${APP_NAME}.*/${APP_NAME}:${IMAGE_TAG}/g' deployment.yaml
+            cat deployment.yaml
+          """
+        }        
+      }
+    }
+
+   stage('Vulnerability Scan - Kubernetes'){
+      steps{
+        parallel(
+          "Kubernetes Cluster Scan":{
+            sh "trivy k8s --report summary cluster"
+            sh "trivy k8s -n kube-system --report summary all"
+          },
+          "Scan YAML Files":{
+            sh "kubesec scan deployment.yaml"
+          }
+        )
+      }
+    }
+
+    stage('Update Changed Deployment to Git'){
+      steps{
+        script{
+          sh """
+            git config --global user.name "Taiwolawal"
+            git config --global user.email "taiwolawal360@gmail.com
+            git add deployment.yaml
+            git commit -m "updated deployment file"
+
+         """
+        }  
+      }
+    }
 
   }
 

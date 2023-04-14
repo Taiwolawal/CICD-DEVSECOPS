@@ -39,10 +39,11 @@ sudo apt-get update
 sudo apt-get install trivy
 
 
-echo ".........----------------#################._.-.-Git-.-._.#################----------------........."
-sudo apt update
-sudo apt install git -y
-git --version
+echo ".........----------------#################._.-.-KubeSec-.-._.#################----------------........."
+curl -LO "https://github.com/controlplaneio/kubesec/releases/latest/download/kubesec-linux-amd64"
+chmod +x kubesec-linux-amd64
+sudo mv kubesec-linux-amd64 /usr/local/bin/kubesec
+kubesec version
 
 
 echo ".........----------------#################._.-.-Jenkins-.-._.#################----------------........."
@@ -56,5 +57,8 @@ sudo systemctl start jenkins
 sudo systemctl enable jenkins
 sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 
+
 echo ".........----------------#################._.-.-Sonarqube-.-._.#################----------------........."
 sudo docker run -d --name sonarqube -p 9000:9000 sonarqube
+
+
