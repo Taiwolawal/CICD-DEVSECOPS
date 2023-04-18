@@ -104,7 +104,7 @@ pipeline {
       }
     } 
 
-    stage('Update CD Pipeline With Image'){
+    /* stage('Update CD Pipeline With Image'){
       steps{
 
       }
@@ -150,7 +150,7 @@ pipeline {
          """
         }  
       }
-    }
+    } */
 
   }
 
