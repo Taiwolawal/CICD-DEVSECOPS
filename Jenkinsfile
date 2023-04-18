@@ -113,11 +113,11 @@ pipeline {
     stage('Update Deployment.yaml file'){
       steps{
         script{
-          sh """
+          sh ""
             cat deployment.yaml
             sed -i '$/${APP_NAME}.*/${APP_NAME}:${IMAGE_TAG}/g' deployment.yaml
             cat deployment.yaml
-          """
+          ""
         }        
       }
     }
