@@ -85,6 +85,7 @@ pipeline {
       steps{
           sh "trivy image ${IMAGE_NAME}:latest > scan.txt"
           sh "cat scan.txt"  
+          sh "bash trivy-image-scan.sh"
       }
     }
 
@@ -109,7 +110,7 @@ pipeline {
       }
     }
 
-     stage('Update Deployment.yaml file'){
+    stage('Update Deployment.yaml file'){
       steps{
         script{
           sh """
@@ -121,7 +122,7 @@ pipeline {
       }
     }
 
-   stage('Vulnerability Scan - Kubernetes'){
+    stage('Vulnerability Scan - Kubernetes'){
       steps{
         parallel(
           "Kubernetes Cluster Scan":{
@@ -130,6 +131,7 @@ pipeline {
           },
           "Scan YAML Files":{
             sh "kubesec scan deployment.yaml"
+            sh "bash trivy-image-scan.sh"
           }
         )
       }
