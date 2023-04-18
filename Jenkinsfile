@@ -104,7 +104,7 @@ pipeline {
       }
     } 
 
-    /* stage('Update CD Pipeline With Image'){
+    stage('Update CD Pipeline With Image'){
       steps{
 
       }
@@ -112,14 +112,9 @@ pipeline {
 
     stage('Update Deployment.yaml file'){
       steps{
-        script{
-
-          sh """
-            cat deployment.yaml
-            sed -i 's/${APP_NAME}.*/${APP_NAME}:${IMAGE_TAG}/g' deployment.yaml
-            cat deployment.yaml
-          """
-        }        
+            sh "cat deployment.yaml"
+            sh "sed -i 's/${APP_NAME}.*/${APP_NAME}:${IMAGE_TAG}/g' deployment.yaml"
+            sh "cat deployment.yaml"   
       }
     }
 
@@ -150,7 +145,7 @@ pipeline {
          """
         }  
       }
-    } */
+    }
 
   }
 
