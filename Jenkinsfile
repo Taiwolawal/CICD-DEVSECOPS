@@ -103,7 +103,7 @@ pipeline {
           sh "docker rmi ${IMAGE_NAME}:latest"
       }
     } 
-
+/* 
     stage('Update CD Pipeline With Image'){
       steps{
 
@@ -115,7 +115,7 @@ pipeline {
         script{
           sh ""
             cat deployment.yaml
-            sed -i '$/${APP_NAME}.*/${APP_NAME}:${IMAGE_TAG}/g' deployment.yaml
+            sed -i '${APP_NAME}.*/${APP_NAME}:${IMAGE_TAG}/g' deployment.yaml
             cat deployment.yaml
           ""
         }        
@@ -149,7 +149,7 @@ pipeline {
          """
         }  
       }
-    }
+    } */
 
   }
 
