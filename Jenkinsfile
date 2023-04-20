@@ -77,6 +77,15 @@ pipeline {
           sh "docker image tag ${IMAGE_NAME} ${IMAGE_NAME}:latest"
       } 
     }
+
+  stage('Docker Image Scan: Trivy'){
+      steps{
+          sh "trivy image ${IMAGE_NAME}:latest > scan.txt"
+          sh "cat scan.txt"  
+          sh "bash trivy-image-scan.sh"
+      }
+    }
+
   }
 
   /* 
