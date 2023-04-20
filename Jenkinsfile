@@ -6,7 +6,7 @@ pipeline {
     APP_NAME = "java-app-argo"
     IMAGE_TAG = "${BUILD_NUMBER}"
     IMAGE_NAME = "${DOCKERHUB_USERNAME}" + "/" + "${APP_NAME}"
-    DOCKER_CREDS = credentials('dockerhub')
+    /* DOCKER_CREDS = credentials('dockerhub') */
     SONAR_CREDS = "jenkins-sonar"
   }
 
