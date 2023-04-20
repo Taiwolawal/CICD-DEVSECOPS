@@ -20,7 +20,7 @@ pipeline {
         }
     }
 
-    /* stage('Unit Tests: JUnit') {
+    stage('Unit Tests: JUnit') {
       steps {
         sh "mvn test"
       }
@@ -32,7 +32,7 @@ pipeline {
         }       
     }
  
-    stage('Static Code Analysis: Sonarqube') {
+  /*   stage('Static Code Analysis: Sonarqube') {
       steps {
         withSonarQubeEnv(credentialsId: 'jenkins-sonar', installationName: 'sonar-api') {
           sh 'mvn clean package sonar:sonar' 
@@ -44,14 +44,14 @@ pipeline {
       steps{
         waitForQualityGate abortPipeline: false, credentialsId: 'jenkins-sonar'
       }
-    }
+    } */
 
     stage('Build Artifact: Maven') {
       steps {
         sh "mvn clean package -DskipTests=true"
         archiveArtifacts 'target/*.jar'
       }
-    } */
+    }
 
     stage('Vulnerability Scan'){
       steps{
@@ -73,8 +73,8 @@ pipeline {
   
   post {
         always {
-         /*  junit 'target/surefire-reports/*.xml' 
-          jacoco execPattern: 'target/jacoco.exec'  */
+          junit 'target/surefire-reports/*.xml' 
+          jacoco execPattern: 'target/jacoco.exec' 
           dependencyCheckPublisher pattern: 'target/dependency-check-report.xml'
         }
     }
