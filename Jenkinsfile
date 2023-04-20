@@ -20,13 +20,13 @@ pipeline {
         }
     }
 
-    stage('Unit Tests - JUnit and Jacoco') {
+    stage('Unit Tests: JUnit') {
       steps {
         sh "mvn test"
       }
     }
 
-    stage('Integration Test Maven'){
+    stage('Integration Test: Maven'){
         steps{
          sh 'mvn verify -DskipUnitTests'
         }       
@@ -44,6 +44,13 @@ pipeline {
     stage('Quality Gate Check Status: Sonarqube'){
       steps{
         waitForQualityGate abortPipeline: false, credentialsId: 'jenkins-sonar'
+      }
+    }
+
+    stage('Build Artifact: Maven') {
+      steps {
+        sh "mvn clean package -DskipTests=true"
+        archiveArtifacts 'target/*.jar'
       }
     }
   }
