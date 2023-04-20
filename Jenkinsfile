@@ -51,7 +51,7 @@ pipeline {
         sh "mvn clean package -DskipTests=true"
         archiveArtifacts 'target/*.jar'
       }
-    } */
+    }
 
     stage('Vulnerability Scan'){
       steps{
@@ -61,13 +61,21 @@ pipeline {
           }, 
           "Dockerfile Scan":{
             script {
-              /* sh "trivy config ." */
+              sh "trivy config ."
               sh "bash trivy-dockerfile-image-scan.sh"
-            /* sh "trivy fs Dockerfile" */
+            sh "trivy fs Dockerfile"
             }
           }
         )      
       }
+    } */
+
+    stage('Docker Image Build'){
+      steps{
+          sh "docker build -t ${IMAGE_NAME} ."  
+          sh "docker image tag ${IMAGE_NAME} ${IMAGE_NAME}:${IMAGE_TAG}"
+          sh "docker image tag ${IMAGE_NAME} ${IMAGE_NAME}:latest"
+      } 
     }
   }
 
