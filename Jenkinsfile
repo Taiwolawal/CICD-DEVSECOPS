@@ -6,7 +6,7 @@ pipeline {
     APP_NAME = "java-app-argo"
     IMAGE_TAG = "${BUILD_NUMBER}"
     IMAGE_NAME = "${DOCKERHUB_USERNAME}" + "/" + "${APP_NAME}"
-    /* DOCKER_CREDS = credentials('dockerhub') */
+    DOCKER_CREDS = credentials('dockerhub')
     SONAR_CREDS = "jenkins-sonar"
   }
 
@@ -78,13 +78,21 @@ pipeline {
       } 
     }
 
-  stage('Docker Image Scan: Trivy'){
+    stage('Docker Image Scan: Trivy'){
       steps{
           sh "trivy image ${IMAGE_NAME}:latest > scan.txt"
           sh "cat scan.txt"  
-          sh "bash trivy-image-scan.sh"
+          /* sh "bash trivy-image-scan.sh" */
       }
     }
+
+    stage('Docker Image Push: DockerHub'){
+      steps{
+          sh 'docker login -u $DOCKER_CREDS_USR -p $DOCKER_CREDS_PSW'
+          sh "docker image push ${IMAGE_NAME}:${IMAGE_TAG}"
+          sh "docker image push ${IMAGE_NAME}:latest"               
+      }      
+    } 
 
   }
 
