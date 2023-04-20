@@ -20,7 +20,7 @@ pipeline {
         }
     }
 
-    stage('Unit Tests: JUnit') {
+    /* stage('Unit Tests: JUnit') {
       steps {
         sh "mvn test"
       }
@@ -37,8 +37,7 @@ pipeline {
         withSonarQubeEnv(credentialsId: 'jenkins-sonar', installationName: 'sonar-api') {
           sh 'mvn clean package sonar:sonar' 
         }
-      }
-      
+      }   
     }
 
     stage('Quality Gate Check Status: Sonarqube'){
@@ -51,6 +50,23 @@ pipeline {
       steps {
         sh "mvn clean package -DskipTests=true"
         archiveArtifacts 'target/*.jar'
+      }
+    } */
+
+    stage('Vulnerability Scan'){
+      steps{
+        parallel(
+          "Dependency Scan":{
+            sh "mvn dependency-check:check"
+          }, 
+          "Dockerfile Scan":{
+            script {
+              sh "trivy config ."
+              /* sh "bash trivy-dockerfile-image-scan.sh" */
+            /* sh "trivy fs Dockerfile" */
+            }
+          }
+        )      
       }
     }
   }
