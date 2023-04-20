@@ -12,7 +12,7 @@ pipeline {
 
   stages {
 
-    stage('Git Checkout'){
+    /* stage('Git Checkout'){
         steps{
             script {
                 git branch: 'main', url: 'https://github.com/Taiwolawal/CICD-DEVSECOPS.git'
@@ -51,7 +51,7 @@ pipeline {
         sh "mvn clean package -DskipTests=true"
         archiveArtifacts 'target/*.jar'
       }
-    }
+    } */
 
     stage('Vulnerability Scan'){
       steps{
