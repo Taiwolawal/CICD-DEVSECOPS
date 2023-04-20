@@ -61,8 +61,8 @@ pipeline {
           }, 
           "Dockerfile Scan":{
             script {
-              sh "trivy config ."
-              /* sh "bash trivy-dockerfile-image-scan.sh" */
+              /* sh "trivy config ." */
+              sh "bash trivy-dockerfile-image-scan.sh"
             /* sh "trivy fs Dockerfile" */
             }
           }
@@ -70,15 +70,16 @@ pipeline {
       }
     }
   }
-  
+
+  /* 
   post {
         always {
-        /*   junit 'target/surefire-reports/*.xml' 
-          jacoco execPattern: 'target/jacoco.exec'  */
+          junit 'target/surefire-reports/*.xml' 
+          jacoco execPattern: 'target/jacoco.exec' 
           dependencyCheckPublisher pattern: 'target/dependency-check-report.xml'
           publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: 'owasp-zap-report', reportFiles: 'zap_report.html', reportName: 'OWASP ZAP HTML Report', reportTitles: 'OWASP ZAP HTML Report'])
         }
-    }
+    } */
 
  } 
 
