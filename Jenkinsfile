@@ -92,7 +92,14 @@ pipeline {
           sh "docker image push ${IMAGE_NAME}:${IMAGE_TAG}"
           sh "docker image push ${IMAGE_NAME}:latest"               
       }      
-    } 
+    }
+
+    stage('Docker Image Cleanup'){
+      steps{
+          sh "docker rmi ${IMAGE_NAME}:${IMAGE_TAG}"
+          sh "docker rmi ${IMAGE_NAME}:latest"
+      }
+    }  
 
   }
 
