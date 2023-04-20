@@ -29,8 +29,7 @@ pipeline {
     stage('Integration Test Maven'){
         steps{
          sh 'mvn verify -DskipUnitTests'
-        }
-        
+        }       
     }
  
     stage('Static Code Analysis: Sonarqube') {
@@ -46,18 +45,9 @@ pipeline {
         waitForQualityGate abortPipeline: false, credentialsId: 'jenkins-sonar'
       }
     }
-
-    
-
   }
 
-  post {
-        always {
-         /*  junit 'target/surefire-reports/*.xml' 
-          jacoco execPattern: 'target/jacoco.exec' 
-          dependencyCheckPublisher pattern: 'target/dependency-check-report.xml' */
-        }
-    }
+  
  } 
 
 
