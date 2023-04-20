@@ -32,7 +32,7 @@ pipeline {
         }       
     }
  
-  /*   stage('Static Code Analysis: Sonarqube') {
+    stage('Static Code Analysis: Sonarqube') {
       steps {
         withSonarQubeEnv(credentialsId: 'jenkins-sonar', installationName: 'sonar-api') {
           sh 'mvn clean package sonar:sonar' 
@@ -44,7 +44,7 @@ pipeline {
       steps{
         waitForQualityGate abortPipeline: false, credentialsId: 'jenkins-sonar'
       }
-    } */
+    }
 
     stage('Build Artifact: Maven') {
       steps {
@@ -76,6 +76,7 @@ pipeline {
           junit 'target/surefire-reports/*.xml' 
           jacoco execPattern: 'target/jacoco.exec' 
           dependencyCheckPublisher pattern: 'target/dependency-check-report.xml'
+          publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: 'owasp-zap-report', reportFiles: 'zap_report.html', reportName: 'OWASP ZAP HTML Report', reportTitles: 'OWASP ZAP HTML Report'])
         }
     }
 
