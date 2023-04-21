@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: myjavaapp
-        image: wizhubdocker8s/::::java-app-argo:61
+        image: wizhubdocker8s/:::::java-app-argo:62
         resources:
           limits: 
             memory: "128Mi"
