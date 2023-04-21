@@ -23,8 +23,8 @@ pipeline {
     stage('Checkout SCM'){
       steps{
         script{
-          git credentials: 'Github',
-          url: 'https://github.com/Taiwolawal/CICD-DEVSECOPS.git'
+          git credentialsId: 'Github',
+          url: 'https://github.com/Taiwolawal/CICD-DEVSECOPS.git',
           branch: 'main'
         }
       }
