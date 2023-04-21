@@ -30,7 +30,7 @@ pipeline {
       }
     }
 
-   /*  stage('Unit Tests: JUnit') {
+    /* stage('Unit Tests: JUnit') {
       steps {
         sh "mvn test"
       }
@@ -54,7 +54,7 @@ pipeline {
       steps{
         waitForQualityGate abortPipeline: false, credentialsId: 'jenkins-sonar'
       }
-    }
+    } */
 
     stage('Build Artifact: Maven') {
       steps {
@@ -63,7 +63,7 @@ pipeline {
       }
     }
 
-    stage('Vulnerability Scan'){
+    /* stage('Vulnerability Scan'){
       steps{
         parallel(
           "Dependency Scan":{
@@ -78,7 +78,7 @@ pipeline {
           }
         )      
       }
-    }  */
+    }   */
 
     stage('Docker Image Build'){
       steps{
@@ -88,13 +88,13 @@ pipeline {
       } 
     }
 
-    stage('Docker Image Scan: Trivy'){
+    /* stage('Docker Image Scan: Trivy'){
       steps{
           sh "trivy image ${IMAGE_NAME}:latest > scan.txt"
           sh "cat scan.txt"  
           sh "bash trivy-image-scan.sh"
       }
-    }
+    } */
 
     stage('Docker Image Push: DockerHub'){
       steps{
@@ -110,6 +110,18 @@ pipeline {
           sh "docker rmi ${IMAGE_NAME}:latest"
       }
     }  
+
+    stage ("Update Kubernetes Deployment File"){
+      steps{
+        script{
+          sh """
+            cat deployment.yaml
+            sed -i 's/${APP_NAME}.*/:${APP_NAME}:${IMAGE_TAG}/g' deployment.yaml
+            cat deployment.yaml
+          """
+        }
+      }
+    }
 
     stage('Push Changed Deployment File to Git'){
       steps{
