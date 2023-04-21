@@ -86,9 +86,9 @@ pipeline {
           }
         )      
       }
-    } */
+    } 
 
-    /* stage('Docker Image Build'){
+    stage('Docker Image Build'){
       steps{
           sh "docker build -t ${IMAGE_NAME} ."  
           sh "docker image tag ${IMAGE_NAME} ${IMAGE_NAME}:${IMAGE_TAG}"
@@ -119,17 +119,6 @@ pipeline {
       }
     }  
 
-    stage ("Update Kubenetes Deployment File"){
-      steps{
-        script{
-          sh """
-            cat deployment.yaml
-            sed -i 's/${APP_NAME}.*/:${APP_NAME}:${IMAGE_TAG}/g' deployment.yaml
-            cat deployment.yaml
-          """
-        }
-      }
-    }
 
     stage('Push Changed Deployment File to Git'){
       steps{
