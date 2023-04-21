@@ -14,7 +14,11 @@ spec:
     spec:
       containers:
       - name: myjavaapp
-        image: nginx
+        image: wizhubdocker8s/java-app-argo:v1
+        resources:
+          limits: 
+            memory: "128Mi"
+            cpu: "500m"
         ports:
         - containerPort: 8080
 
