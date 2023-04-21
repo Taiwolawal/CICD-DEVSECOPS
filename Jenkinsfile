@@ -123,7 +123,7 @@ pipeline {
             git commit -m "updated deployment file"
           """
           withCredentials([gitUsernamePassword(credentialsId: 'Github', gitToolName: 'Default')]) {
-            sh "git push --verbose https://github.com/Taiwolawal/CICD-DEVSECOPS.git main"
+            sh "git push https://github.com/Taiwolawal/CICD-DEVSECOPS.git main"
           }
           
         }
