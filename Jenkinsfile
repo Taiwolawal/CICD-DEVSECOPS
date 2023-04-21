@@ -30,15 +30,7 @@ pipeline {
       }
     }
 
-    /* stage('Git Checkout'){
-        steps{
-            script {
-                git branch: 'main', url: 'https://github.com/Taiwolawal/CICD-DEVSECOPS.git'
-            }
-        }
-    }
-
-    stage('Unit Tests: JUnit') {
+    /* stage('Unit Tests: JUnit') {
       steps {
         sh "mvn test"
       }
@@ -81,7 +73,7 @@ pipeline {
             script {
               sh "trivy config ."
               sh "bash trivy-dockerfile-image-scan.sh"
-            sh "trivy fs Dockerfile"
+              sh "trivy fs Dockerfile"
             }
           }
         )      
@@ -103,7 +95,7 @@ pipeline {
           sh "bash trivy-image-scan.sh"
       }
     }
-
+ */
     stage('Docker Image Push: DockerHub'){
       steps{
           sh 'docker login -u $DOCKER_CREDS_USR -p $DOCKER_CREDS_PSW'
@@ -118,7 +110,6 @@ pipeline {
           sh "docker rmi ${IMAGE_NAME}:latest"
       }
     }  
-
 
     stage('Push Changed Deployment File to Git'){
       steps{
@@ -135,7 +126,7 @@ pipeline {
           
         }
       }
-    } */
+    } 
 
   }
 
