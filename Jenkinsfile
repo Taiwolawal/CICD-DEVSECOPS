@@ -123,10 +123,9 @@ pipeline {
             git add deployment.yaml
             git commit -m "updated deployment file"
           """
-          withCredentials([gitUsernamePassword(credentialsId: 'Github', gitToolName: 'Default')]) {
+          withCredentials([string(credentialsId: 'Git-Token', variable: 'Git')]) {
             sh "git push https://github.com/Taiwolawal/CICD-DEVSECOPS.git main"
           }
-
         }
       }
     }
