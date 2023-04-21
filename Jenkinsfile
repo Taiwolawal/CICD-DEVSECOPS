@@ -124,7 +124,7 @@ pipeline {
             git commit -m "updated deployment file"
           """
           withCredentials([string(credentialsId: 'Git-Token', variable: 'Git')]) {
-            sh "git push https://github.com/Taiwolawal/CICD-DEVSECOPS.git main"
+            sh "git push --verbose https://github.com/Taiwolawal/CICD-DEVSECOPS.git main"
           }
         }
       }
