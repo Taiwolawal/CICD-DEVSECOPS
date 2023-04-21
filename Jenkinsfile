@@ -30,7 +30,7 @@ pipeline {
       }
     }
 
-    /* stage('Unit Tests: JUnit') {
+   /*  stage('Unit Tests: JUnit') {
       steps {
         sh "mvn test"
       }
@@ -78,7 +78,7 @@ pipeline {
           }
         )      
       }
-    } 
+    }  */
 
     stage('Docker Image Build'){
       steps{
@@ -95,7 +95,7 @@ pipeline {
           sh "bash trivy-image-scan.sh"
       }
     }
- */
+
     stage('Docker Image Push: DockerHub'){
       steps{
           sh 'docker login -u $DOCKER_CREDS_USR -p $DOCKER_CREDS_PSW'
