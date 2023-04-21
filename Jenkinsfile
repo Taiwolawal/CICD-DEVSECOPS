@@ -116,7 +116,6 @@ pipeline {
     stage('Push Changed Deployment File to Git'){
       steps{
         script{
-
           sh """
             git config --global user.name "Taiwolawal"
             git config --global user.email "taiwolawal360@gmail.com"
