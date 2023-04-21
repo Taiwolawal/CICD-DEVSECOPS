@@ -113,6 +113,24 @@ pipeline {
       }
     }
 
+    stage('Push Changed Deployment File to Git'){
+      steps{
+        script{
+
+          sh """
+            git config --global user.name "Taiwolawal"
+            git config --global user.email "taiwolawal360@gmail.com"
+            git add deployment.yaml
+            git commit -m "updated deployment file"
+          """
+          withCredentials([gitUsernamePassword(credentialsId: 'Github', gitToolName: 'Default')]) {
+            sh "git push https://github.com/Taiwolawal/CICD-DEVSECOPS.git main"
+          }
+
+        }
+      }
+    }
+
   }
 
   /* 
