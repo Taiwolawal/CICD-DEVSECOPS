@@ -7,10 +7,28 @@ pipeline {
     IMAGE_TAG = "${BUILD_NUMBER}"
     IMAGE_NAME = "${DOCKERHUB_USERNAME}" + "/" + "${APP_NAME}"
     DOCKER_CREDS = credentials('dockerhub')
-    SONAR_CREDS = "jenkins-sonar"
+    
   }
 
   stages {
+
+    stage('Clean Workspace'){
+      steps{
+        script{
+          cleanWs()
+        }
+      }
+    }
+
+    stage('Checkout SCM'){
+      steps{
+        script{
+          git credentials: 'Github',
+          url: 'https://github.com/Taiwolawal/CICD-DEVSECOPS.git'
+          branch: 'main'
+        }
+      }
+    }
 
     /* stage('Git Checkout'){
         steps{
@@ -70,7 +88,7 @@ pipeline {
       }
     } */
 
-    stage('Docker Image Build'){
+    /* stage('Docker Image Build'){
       steps{
           sh "docker build -t ${IMAGE_NAME} ."  
           sh "docker image tag ${IMAGE_NAME} ${IMAGE_NAME}:${IMAGE_TAG}"
@@ -82,7 +100,7 @@ pipeline {
       steps{
           sh "trivy image ${IMAGE_NAME}:latest > scan.txt"
           sh "cat scan.txt"  
-          /* sh "bash trivy-image-scan.sh" */
+          sh "bash trivy-image-scan.sh"
       }
     }
 
@@ -128,7 +146,7 @@ pipeline {
           
         }
       }
-    }
+    } */
 
   }
 
