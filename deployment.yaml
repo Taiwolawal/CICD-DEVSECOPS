@@ -28,10 +28,12 @@ kind: Service
 metadata:
   name: myjavaapp-service
 spec:
+  type: NodePort
   selector:
     app: myjavaapp
   ports:
   - name: http
     port: 80
     targetPort: 8080
-  type: LoadBalancer
+    nodePort: 30000
+  
