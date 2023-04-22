@@ -109,36 +109,19 @@ pipeline {
           sh "docker rmi ${IMAGE_NAME}:${IMAGE_TAG}"
           sh "docker rmi ${IMAGE_NAME}:latest"
       }
-    }  
+    } 
 
-    stage ("Update Kubernetes Deployment File"){
+    stage('Trigger CD Pipeline'){
       steps{
-        script{
-          sh """
-            cat deployment.yaml
-            sed -i 's/${APP_NAME}.*/:${APP_NAME}:${IMAGE_TAG}/g' deployment.yaml
-            cat deployment.yaml
-          """
-        }
-      }
-    }
-
-    stage('Push Changed Deployment File to Git'){
-      steps{
-        script{
-          sh """
-            git config --global user.name "Taiwolawal"
-            git config --global user.email "taiwolawal360@gmail.com"
-            git add deployment.yaml
-            git commit -m "updated deployment file"
-          """
-          withCredentials([gitUsernamePassword(credentialsId: 'Github', gitToolName: 'Default')]) {
-            sh "git push https://github.com/Taiwolawal/CICD-DEVSECOPS.git main"
-          }
-          
-        }
+        sh "curl -v -k --user jenkins:117460c38498ed9515004d8120d2fb84c6 \
+            -X POST _H 'cache-control: no-cache' -H 'content-type: application/x-www-form-urlencoded' \
+            --data 'IMAGE_TAG=${IMAGE_TAG}' \
+            'http://44.215.173.223:8080/job/DevSecOps-CD/buildWithParameters?Token=gitops-config'"
       }
     } 
+    
+
+    
 
   }
 
