@@ -71,7 +71,7 @@ pipeline {
           }, 
           "Dockerfile Scan":{
             script {
-              sh "trivy config ."
+              sh "trivy config Dockerfile"
               //sh "bash trivy-dockerfile-image-scan.sh"
               sh "trivy fs Dockerfile"
             }
