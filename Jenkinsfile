@@ -119,9 +119,6 @@ pipeline {
             'http://44.215.173.223:8080/job/DevSecOps-CD/buildWithParameters?Token=gitops-config'"
       }
     } 
-    
-
-    
 
   }
 
