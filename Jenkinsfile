@@ -30,7 +30,7 @@ pipeline {
       }
     }
 
-    /* stage('Unit Tests: JUnit') {
+    stage('Unit Tests: JUnit') {
       steps {
         sh "mvn test"
       }
@@ -54,7 +54,7 @@ pipeline {
       steps{
         waitForQualityGate abortPipeline: false, credentialsId: 'jenkins-sonar'
       }
-    } */
+    }
 
     stage('Build Artifact: Maven') {
       steps {
@@ -63,7 +63,7 @@ pipeline {
       }
     }
 
-    /* stage('Vulnerability Scan'){
+    stage('Vulnerability Scan'){
       steps{
         parallel(
           "Dependency Scan":{
@@ -72,13 +72,13 @@ pipeline {
           "Dockerfile Scan":{
             script {
               sh "trivy config ."
-              sh "bash trivy-dockerfile-image-scan.sh"
+              //sh "bash trivy-dockerfile-image-scan.sh"
               sh "trivy fs Dockerfile"
             }
           }
         )      
       }
-    }   */
+    }  
 
     stage('Docker Image Build'){
       steps{
@@ -88,13 +88,13 @@ pipeline {
       } 
     }
 
-    /* stage('Docker Image Scan: Trivy'){
+    stage('Docker Image Scan: Trivy'){
       steps{
           sh "trivy image ${IMAGE_NAME}:latest > scan.txt"
           sh "cat scan.txt"  
-          sh "bash trivy-image-scan.sh"
+          //sh "bash trivy-image-scan.sh"
       }
-    } */
+    }
 
     stage('Docker Image Push: DockerHub'){
       steps{
@@ -121,16 +121,6 @@ pipeline {
     } 
 
   }
-
-  /* 
-  post {
-        always {
-          junit 'target/surefire-reports/*.xml' 
-          jacoco execPattern: 'target/jacoco.exec' 
-          dependencyCheckPublisher pattern: 'target/dependency-check-report.xml'
-          publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: 'owasp-zap-report', reportFiles: 'zap_report.html', reportName: 'OWASP ZAP HTML Report', reportTitles: 'OWASP ZAP HTML Report'])
-        }
-    } */
 
  } 
 
