@@ -11,8 +11,7 @@ This project aims to fully integrate security in our DevOps pipeline and focus o
 - Kubernetes Security Concepts
 - HashiCorp Vault + Secret Injection into Kubernetes Pod
 - Find Vulnerabilities in Dependencies, Dockerfile, Images, K8s Resources
-- Unit Test, Mutation Test, SAST, DAST, Integration Test
-- Integrate/Shifting Security Left within the DevOps Pipeline
+- Unit Test, SAST (Static Code Analysis), DAST, Integration Test
 - Fix/Patch Vulnerabilities in Dependencies, Dockerfile, Images, K8s Resources
 - Monitoring Vulnerabilities and Kubernetes Cluster
 
@@ -25,7 +24,7 @@ In this project we will be deploying a Java based applcation into a kubernetes c
 
 ## Requirements
 - ec2 instance for our jenkins server with appropriate security settings
-- Install jenkins, git, maven (to build java application), Kubernetes CLI (kubectl), and docker onto our jenkins server.
+- Install jenkins, maven (to build java application), Kubernetes CLI (kubectl), and docker onto our jenkins server.
 
 <img width="1361" alt="image" src="https://user-images.githubusercontent.com/50557587/230621941-05aa0d27-1ea2-4f6b-ae5e-f40683d49a9b.png">
 
@@ -47,12 +46,8 @@ Installation complete
 <img width="1019" alt="image" src="https://user-images.githubusercontent.com/50557587/230652685-e0358e35-03f4-4578-b9e3-38c511407671.png">
 
 We need to install some plugin needed by jenkins
-- Jacoco
-- Sonar
-- Pit mutation
 - kubernetes-cli
-- Performance
-- Blue-ocean
+- Blue-ocean (to display our pipeline properly)
 
 We can test our pipeline running a small test
 
