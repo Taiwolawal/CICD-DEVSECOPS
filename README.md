@@ -59,9 +59,9 @@ We need to ensure that we have a file named Jenkinsfile in our code, which gives
 
 Since we are working with a java based application, the following stages will be setup in our jenkinsfile to implement our continous integration
 - Checkout source code
-- Unit Test
-- Integration Test
-- Static code Analysis with quality gate check
+- Unit test
+- Integration test
+- Static code analysis with quality gate check
 - Build artifact
 - Vulnerability Scan
 - Docker image build
@@ -133,10 +133,17 @@ stage('Integration Test: Maven'){
 The breakdown of the command are:
 
 mvn: This is the command to invoke the Maven build tool.
+
 verify: This is the Maven lifecycle phase that executes the integration tests along with other lifecycle phases such as compilation, packaging, and unit testing.
+
 -DskipTests: This Maven property skips the execution of unit tests during the build. It ensures that only the integration tests are executed in this stage
 
 The focus of this stage is to focus on testing the integration of different components or modules of your application.
+
+# Static Code Analysis
+We will setup SonarQube to run static code analysis on our code which helps to find bugs in the development cycle and set quality gate to ensure that standards are met and regulated in the project plus defining a set of threshold measures set on your project. 
+
+
 
 
 <img width="1361" alt="image" src="https://user-images.githubusercontent.com/50557587/230621941-05aa0d27-1ea2-4f6b-ae5e-f40683d49a9b.png">
