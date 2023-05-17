@@ -55,9 +55,9 @@ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 - Now, our repo has been connected to the jenkins server to pull any change from repository and build.
 
 ## Setting up our CI pipeline
-We need to ensure that we have a file named Jenkinsfile in our code, which gives a detail step of what we plan to do with our code
+We need to ensure that we have a file named Jenkinsfile in our code, which gives a detail step of what we plan to do with our code.
 
-Since we are working with a java based application, the following stages will be setup in our jenkinsfile to implement our continous integration
+Since we are working with a java based application, the following stages will be setup in our jenkinsfile to implement our continous integration.
 - Checkout source code
 - Unit test
 - Integration test
@@ -70,7 +70,7 @@ Since we are working with a java based application, the following stages will be
 - Docker Image Cleanup
 - Trigger CD pipeline
 
-# Unit Test
+## Unit Test
 When working a CICD pipeline, the first thing you would want to do with your code when there is a new change to the code is to run some form of basic test on it like 
 unit test, which helps developer to detect bug or issue early in the development process. Since we are working with a java application we will run `mvn test`.
 
@@ -142,6 +142,25 @@ The focus of this stage is to focus on testing the integration of different comp
 
 # Static Code Analysis
 We will setup SonarQube to run static code analysis on our code which helps to find bugs in the development cycle and set quality gate to ensure that standards are met and regulated in the project plus defining a set of threshold measures set on your project. 
+
+Since we will be working with containerised application in this project we could set up a sonarqube container.
+
+Install docker on our jenkins-server.
+
+````
+sudo apt-get update -y
+sudo apt install apt-transport-https ca-certificates curl software-properties-common -y
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable" -y
+sudo apt update -y
+apt-cache policy docker-ce -y
+sudo apt install docker-ce -y
+sudo chmod 777 /var/run/docker.sock 
+````
+
+Set up Sonarqube as a container running on our jenkins server `sudo docker run -d --name sonarqube -p 9000:9000 sonarqube`
+
+
 
 
 
