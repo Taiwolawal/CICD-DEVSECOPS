@@ -118,7 +118,7 @@ The first two stages are meant to
 
 After running our first test, it came out successfully, which implies our code is working fine as expected.
 
-# Integration Test
+## Integration Test
 The next stage we want to run our pipeline is integration test. 
 
 ```
@@ -140,7 +140,7 @@ verify: This is the Maven lifecycle phase that executes the integration tests al
 
 The focus of this stage is to focus on testing the integration of different components or modules of your application.
 
-# Static Code Analysis
+## Static Code Analysis
 We will setup SonarQube to run static code analysis on our code which helps to find bugs in the development cycle and set quality gate to ensure that standards are met and regulated in the project plus defining a set of threshold measures set on your project. 
 
 Since we will be working with containerised application in this project we could set up a sonarqube container.
