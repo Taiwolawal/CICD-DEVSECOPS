@@ -72,14 +72,15 @@ Since we are working with a java based application, the following stages will be
 
 # Unit Test
 When working a CICD pipeline, the first thing you would want to do with your code when there is a new change to the code is to run some form of basic test on it like 
-unit test, which helps developer with early bug detection. Since we are working with a java application we will run `mvn test`.
+unit test, which helps developer to detect bug or issue early in the development process. Since we are working with a java application we will run `mvn test`.
 
 ```
 pipeline {
     agent any
     
     stages {
-        stage('Clean Workspace'){
+
+    stage('Clean Workspace'){
       steps{
         script{
           cleanWs()
@@ -107,6 +108,10 @@ pipeline {
 }
 
 ```
+
+The first two stages are meant to 
+- Cleanup a workspace before starting a new build to ensure a clean environment
+- Checking out the source code from a Git repository in a Jenkins pipeline
 
 
 
