@@ -36,11 +36,11 @@ pipeline {
       }
     }
 
-    // stage('Integration Test: Maven'){
-    //     steps{
-    //      sh 'mvn verify -DskipUnitTests'
-    //     }       
-    // }
+    stage('Integration Test: Maven'){
+        steps{
+         sh 'mvn verify -DskipUnitTests'
+        }       
+    }
  
     // stage('Static Code Analysis: Sonarqube') {
     //   steps {

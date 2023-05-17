@@ -116,7 +116,27 @@ The first two stages are meant to
 ![image](https://github.com/Taiwolawal/CICD-DEVSECOPS/assets/50557587/4a361789-8ba7-4b0d-a643-c1f18996686d)
 ![image](https://github.com/Taiwolawal/CICD-DEVSECOPS/assets/50557587/98a2da85-c55f-45ce-a1f2-96a9d22b8947)
 
+After running our first test, it came out successfully, which implies our code is working fine as expected.
 
+# Integration Test
+The next stage we want to run our pipeline is integration test. 
+
+```
+stage('Integration Test: Maven'){
+        steps{
+         sh 'mvn verify -DskipUnitTests'
+        }       
+    }
+```
+
+
+The breakdown of the command are:
+
+mvn: This is the command to invoke the Maven build tool.
+verify: This is the Maven lifecycle phase that executes the integration tests along with other lifecycle phases such as compilation, packaging, and unit testing.
+-DskipTests: This Maven property skips the execution of unit tests during the build. It ensures that only the integration tests are executed in this stage
+
+The focus of this stage is to focus on testing the integration of different components or modules of your application.
 
 
 <img width="1361" alt="image" src="https://user-images.githubusercontent.com/50557587/230621941-05aa0d27-1ea2-4f6b-ae5e-f40683d49a9b.png">
