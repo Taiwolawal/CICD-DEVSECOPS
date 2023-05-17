@@ -113,6 +113,10 @@ The first two stages are meant to
 - Cleanup a workspace before starting a new build to ensure a clean environment
 - Checking out the source code from a Git repository in a Jenkins pipeline
 
+![image](https://github.com/Taiwolawal/CICD-DEVSECOPS/assets/50557587/4a361789-8ba7-4b0d-a643-c1f18996686d)
+![image](https://github.com/Taiwolawal/CICD-DEVSECOPS/assets/50557587/98a2da85-c55f-45ce-a1f2-96a9d22b8947)
+
+
 
 
 <img width="1361" alt="image" src="https://user-images.githubusercontent.com/50557587/230621941-05aa0d27-1ea2-4f6b-ae5e-f40683d49a9b.png">
