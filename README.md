@@ -32,7 +32,6 @@ We need to install jenkins unto our ec2 instance which would act as our jenkins 
 Run the below code 
 
 ```
-echo ".........----------------#################._.-.-Jenkins-.-._.#################----------------........."
 curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key | sudo tee \
   /usr/share/keyrings/jenkins-keyring.asc > /dev/null
 echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
@@ -48,9 +47,66 @@ sudo systemctl start jenkins
 sudo systemctl enable jenkins
 sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 ```
-- Perform initial jenkins set up from your browsers http://<Jenkins-Server-Public-IP-Address-or-Public-DNS-Name>:8080
+- Perform initial jenkins set up from your browsers `http://<Jenkins-Server-Public-IP-Address-or-Public-DNS-Name>:8080`.
 - You will prompted to provide a default admin password. Retrieve from your server `sudo cat /var/lib/jenkins/secrets/initialAdminPassword`. 
-- Configure jenkins to retrieve source code from github by enabling webhook in your github repository.
+- Configure jenkins to retrieve source code from your github repo by enabling webhook in your repository.
+
+- Create a freestyle project on the Jenkins web console named DevSecOps-CI, and provide your code github repository.
+- Now, our repo has been connected to the jenkins server to pull any change from repository and build.
+
+## Setting up our CI pipeline
+We need to ensure that we have a file named Jenkinsfile in our code, which gives a detail step of what we plan to do with our code
+
+Since we are working with a java based application, the following stages will be setup in our jenkinsfile to implement our continous integration
+- Checkout source code
+- Unit Test
+- Integration Test
+- Static code Analysis with quality gate check
+- Build artifact
+- Vulnerability Scan
+- Docker image build
+- Docker image scan
+- Image push to Dockerhub
+- Docker Image Cleanup
+- Trigger CD pipeline
+
+# Unit Test
+When working a CICD pipeline, the first thing you would want to do with your code when there is a new change to the code is to run some form of basic test on it like 
+unit test, which helps developer with early bug detection. Since we are working with a java application we will run `mvn test`.
+
+```
+pipeline {
+    agent any
+    
+    stages {
+        stage('Clean Workspace'){
+      steps{
+        script{
+          cleanWs()
+        }
+      }
+    }
+
+    stage('Checkout SCM'){
+      steps{
+        script{
+          git credentialsId: 'Github',
+          url: 'https://github.com/Taiwolawal/CICD-DEVSECOPS.git',
+          branch: 'main'
+        }
+      }
+    }
+
+    stage('Unit Tests: JUnit') {
+      steps {
+        sh "mvn test"
+      }
+    }
+        
+    }
+}
+
+```
 
 
 
