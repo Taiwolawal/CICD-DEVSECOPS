@@ -23,8 +23,36 @@ This is a typical workflow pipeline and security checks embedded in each stage.
 In this project we will be deploying a Java based applcation into a kubernetes cluster making use of Jenkins for our continous integration and Argocd for continous deployment respectively.
 
 ## Requirements
-- ec2 instance for our jenkins server with appropriate security settings
-- Install jenkins, maven (to build java application), Kubernetes CLI (kubectl), and docker onto our jenkins server.
+- ec2 instance of t3.medium for our jenkins server with appropriate security settings.
+<!-- - The following installation are required on our jenkins server: jenkins, maven (to build java application), Kubernetes CLI (kubectl),docker, sonarqube (for code quality analysis). -->
+
+
+## Setting up Jenkins Server
+We need to install jenkins unto our ec2 instance which would act as our jenkins server for our CICD build
+Run the below code 
+
+```
+echo ".........----------------#################._.-.-Jenkins-.-._.#################----------------........."
+curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key | sudo tee \
+  /usr/share/keyrings/jenkins-keyring.asc > /dev/null
+echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
+  https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
+  /etc/apt/sources.list.d/jenkins.list > /dev/null
+sudo apt update
+sudo apt install -y openjdk-11-jdk
+wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
+sudo sh -c 'echo deb https://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
+sudo apt update
+sudo apt install -y jenkins
+sudo systemctl start jenkins
+sudo systemctl enable jenkins
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+```
+- Perform initial jenkins set up from your browsers http://<Jenkins-Server-Public-IP-Address-or-Public-DNS-Name>:8080
+- You will prompted to provide a default admin password. Retrieve from your server `sudo cat /var/lib/jenkins/secrets/initialAdminPassword`. 
+- Configure jenkins to retrieve source code from github by enabling webhook in your github repository.
+
+
 
 <img width="1361" alt="image" src="https://user-images.githubusercontent.com/50557587/230621941-05aa0d27-1ea2-4f6b-ae5e-f40683d49a9b.png">
 
@@ -59,8 +87,7 @@ The error we got in the screenshot was mainly because we do not have a kubernete
 
 <img width="760" alt="image" src="https://user-images.githubusercontent.com/50557587/230690480-4ed5f587-c392-4398-9b72-374404e36d0c.png">
 
-## Use case
-![image](https://user-images.githubusercontent.com/50557587/230690630-cdb9d6bc-d2d2-4fbe-81cb-08d1c31db32b.png)
+
 
 
 

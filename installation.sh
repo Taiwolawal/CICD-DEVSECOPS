@@ -9,23 +9,6 @@ sudo apt install maven -y
 mvn -version
 
 
-echo ".........----------------#################._.-.-Jenkins-.-._.#################----------------........."
-curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key | sudo tee \
-  /usr/share/keyrings/jenkins-keyring.asc > /dev/null
-echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
-  https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
-  /etc/apt/sources.list.d/jenkins.list > /dev/null
-sudo apt update
-sudo apt install -y openjdk-11-jdk
-wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
-sudo sh -c 'echo deb https://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
-sudo apt update
-sudo apt install -y jenkins
-sudo systemctl start jenkins
-sudo systemctl enable jenkins
-sudo cat /var/lib/jenkins/secrets/initialAdminPassword
-
-
 echo ".........----------------#################._.-.-Docker-.-._.#################----------------........."
 sudo apt-get update -y
 sudo apt install apt-transport-https ca-certificates curl software-properties-common -y
@@ -39,7 +22,6 @@ sudo chmod 777 /var/run/docker.sock
 
 echo ".........----------------#################._.-.-Sonarqube-.-._.#################----------------........."
 sudo docker run -d --name sonarqube -p 9000:9000 sonarqube
-
 
 
 echo ".........----------------#################._.-.-Kubectl-.-._.#################----------------........."
@@ -56,6 +38,22 @@ echo deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main |
 sudo apt-get update
 sudo apt-get install trivy
 
+
+echo ".........----------------#################._.-.-Jenkins-.-._.#################----------------........."
+curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key | sudo tee \
+  /usr/share/keyrings/jenkins-keyring.asc > /dev/null
+echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
+  https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
+  /etc/apt/sources.list.d/jenkins.list > /dev/null
+sudo apt update
+sudo apt install -y openjdk-11-jdk
+wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
+sudo sh -c 'echo deb https://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
+sudo apt update
+sudo apt install -y jenkins
+sudo systemctl start jenkins
+sudo systemctl enable jenkins
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 
 echo ".........----------------#################._.-.-KubeSec-.-._.#################----------------........."
 curl -LO "https://github.com/controlplaneio/kubesec/releases/latest/download/kubesec-linux-amd64"
