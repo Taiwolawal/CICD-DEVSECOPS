@@ -42,13 +42,13 @@ pipeline {
         }       
     }
  
-    // stage('Static Code Analysis: Sonarqube') {
-    //   steps {
-    //     withSonarQubeEnv(credentialsId: 'jenkins-sonar', installationName: 'sonar-api') {
-    //       sh 'mvn clean package sonar:sonar' 
-    //     }
-    //   }   
-    // }
+    stage('Static Code Analysis: Sonarqube') {
+      steps {
+        withSonarQubeEnv(credentialsId: 'jenkins-sonar', installationName: 'sonar-api') {
+          sh 'mvn clean package sonar:sonar' 
+        }
+      }   
+    }
 
     // stage('Quality Gate Check Status: Sonarqube'){
     //   steps{

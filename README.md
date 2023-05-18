@@ -160,6 +160,8 @@ sudo chmod 777 /var/run/docker.sock
 
 Set up Sonarqube as a container running on our jenkins server `sudo docker run -d --name sonarqube -p 9000:9000 sonarqube`. Ensure you open port 9000 on your jenkins-server. Confirm docker and sonarqube are up and running.
 
+Install all the necessary plugins for sonnarqube to work properly and configure sonarqube server details with Sonarqube token in order to authenticate
+
 <img width="1354" alt="image" src="https://github.com/Taiwolawal/CICD-DEVSECOPS/assets/50557587/ddc411ff-8c2f-49ea-93a0-e12acd6c9859">
 
 
