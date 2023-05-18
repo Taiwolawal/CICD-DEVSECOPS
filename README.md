@@ -158,7 +158,7 @@ sudo apt install docker-ce -y
 sudo chmod 777 /var/run/docker.sock 
 ````
 
-Set up Sonarqube as a container running on our jenkins server `sudo docker run -d --name sonarqube -p 9000:9000 sonarqube`. Ensure you open port 9000 on your jenkins-server.
+Set up Sonarqube as a container running on our jenkins server `sudo docker run -d --name sonarqube -p 9000:9000 sonarqube`. Ensure you open port 9000 on your jenkins-server. Confirm docker and sonarqube are up and running
 
 
 Install necessary plugins required for sonarqube 
