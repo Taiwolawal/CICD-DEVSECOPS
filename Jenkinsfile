@@ -50,11 +50,11 @@ pipeline {
       }   
     }
 
-    // stage('Quality Gate Check Status: Sonarqube'){
-    //   steps{
-    //     waitForQualityGate abortPipeline: false, credentialsId: 'jenkins-sonar'
-    //   }
-    // }
+    stage('Quality Gate Check Status: Sonarqube'){
+      steps{
+        waitForQualityGate abortPipeline: false, credentialsId: 'jenkins-sonar'
+      }
+    }
 
     // stage('Build Artifact: Maven') {
     //   steps {
